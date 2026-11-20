@@ -292,9 +292,6 @@
     updateTunnel();
 
     const themeToggle = document.getElementById('themeToggle');
-    let savedTheme = null;
-    try { savedTheme = localStorage.getItem('denis-work-theme'); } catch {}
-    if (savedTheme === 'light') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = 'dark';
     function syncThemeLabel() {
       const dark = document.documentElement.dataset.theme === 'dark';
       themeToggle.setAttribute('aria-label', dark ? 'Переключить светлую тему' : 'Переключить тёмную тему');
@@ -304,7 +301,6 @@
     themeToggle.addEventListener('click', () => {
       const dark = document.documentElement.dataset.theme !== 'dark';
       if (dark) document.documentElement.dataset.theme = 'dark'; else delete document.documentElement.dataset.theme;
-      try { localStorage.setItem('denis-work-theme', dark ? 'dark' : 'light'); } catch {}
       syncThemeLabel();
     });
 
