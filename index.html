@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ru" class="js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Один месяц вайб-кодинга: 10 направлений, реальные задачи, запущенные продукты и рабочие AI-контуры.">
+  <meta name="theme-color" content="#f4f3ef">
+  <title>30 дней вайба — журнал сделанного</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%234a64e8'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial' font-weight='700' font-size='30' fill='white'%3E30%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="assets/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/denis.webp" as="image">
+  <style>
+    @font-face{font-family:Manrope;font-style:normal;font-weight:200 800;font-display:swap;src:url('assets/manrope-cyrillic.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+    @font-face{font-family:Manrope;font-style:normal;font-weight:200 800;font-display:swap;src:url('assets/manrope-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2190-21FF}
+    :root{--paper:#f4f3ef;--ink:#191a1b;--line:#d4d4ce;--muted:#686a67;--blue:#4a64e8;--night:#111522;--acid:#d7ff5f;color-scheme:light}
+    html[data-theme="dark"]{--paper:#15191c;--ink:#f1f1ec;--line:#363e43;--muted:#a9afb2;--blue:#aab7ec;color-scheme:dark}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:30px}
+    body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.55 Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
+    body.modal-open{overflow:hidden}
+    button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+    button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+    ::selection{background:var(--blue);color:#fff}
+    .container{width:min(1440px,calc(100% - 9vw));margin:auto}
+    .overline{margin:0;font-size:10px;letter-spacing:.19em;font-weight:800;text-transform:uppercase}
+    .site-nav{height:83px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:5}
+    .wordmark{font-size:15px;letter-spacing:.16em;font-weight:800;white-space:nowrap}.wordmark span{color:var(--blue)}
+    .site-nav nav{display:flex;gap:38px}.site-nav nav a,.nav-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.site-nav nav a:hover{color:var(--blue)}
+    .nav-actions{display:flex;align-items:center;gap:18px}.nav-tag{color:var(--muted)}
+    .theme-toggle{position:relative;display:grid;width:44px;height:44px;padding:0;place-items:center;border:1px solid var(--line);border-radius:50%;background:color-mix(in srgb,var(--paper) 88%,var(--ink) 12%);color:var(--ink);transition:transform .25s,background .3s}
+    .theme-toggle:hover{transform:translateY(-2px)}.theme-toggle svg{width:23px;fill:none;stroke:currentColor;stroke-width:1.6}.theme-toggle .rays{opacity:0}html[data-theme="dark"] .theme-toggle .rays{opacity:1}
+
+    .hero{min-height:675px;display:grid;grid-template-columns:54% 46%;position:relative}
+    .hero-text{padding:45px 0 65px;z-index:1}
+    .hero h1{font-size:clamp(67px,8.8vw,145px);font-weight:800;line-height:.88;letter-spacing:-.09em;margin:39px 0 30px}
+    .hero h1 span{font-weight:500;color:transparent;-webkit-text-stroke:1.8px var(--ink)}
+    .hero h1 b{color:var(--ink);font-style:normal}
+    .hero-position{margin:0 0 20px;font-size:20px;line-height:1.4;letter-spacing:-.04em}
+    .hero-description{max-width:365px;margin:0;color:var(--muted);font-size:14px}
+    .scroll-link{display:inline-flex;align-items:center;gap:18px;margin-top:25px;font-size:10px;font-weight:800;letter-spacing:.1em}
+    .scroll-link span{display:grid;place-items:center;background:var(--ink);color:var(--paper);width:42px;height:42px;font-size:20px;transition:transform .25s}.scroll-link:hover span{transform:translateY(4px)}
+    .portrait{position:relative;margin-right:calc((min(1440px,100vw - 9vw) - 100vw)/2);min-height:640px;background-image:url('assets/denis.webp');background-size:cover;background-position:center 28%;background-color:#c7271d;overflow:hidden}
+    .portrait:before{position:absolute;inset:0;content:'';background:linear-gradient(90deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 97%,transparent) 6%,color-mix(in srgb,var(--paper) 90%,transparent) 12%,color-mix(in srgb,var(--paper) 79%,transparent) 18%,color-mix(in srgb,var(--paper) 65%,transparent) 24%,color-mix(in srgb,var(--paper) 49%,transparent) 30%,color-mix(in srgb,var(--paper) 33%,transparent) 36%,color-mix(in srgb,var(--paper) 19%,transparent) 42%,color-mix(in srgb,var(--paper) 8%,transparent) 48%,transparent 54%),linear-gradient(180deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 88%,transparent) 4%,color-mix(in srgb,var(--paper) 65%,transparent) 8%,color-mix(in srgb,var(--paper) 35%,transparent) 12%,color-mix(in srgb,var(--paper) 12%,transparent) 16%,transparent 20%),linear-gradient(0deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 88%,transparent) 4%,color-mix(in srgb,var(--paper) 65%,transparent) 8%,color-mix(in srgb,var(--paper) 35%,transparent) 12%,color-mix(in srgb,var(--paper) 12%,transparent) 16%,transparent 20%);pointer-events:none}
+    .portrait:after{position:absolute;right:25px;bottom:24px;content:'НЕ ПОРТФОЛИО / А ЖУРНАЛ';padding:8px 11px;background:#191a1bd9;color:#fff;font-size:9px;font-weight:800;letter-spacing:.14em}
+    .hero .overline,.hero h1,.hero-position,.hero-description,.scroll-link{animation:hero-in .85s cubic-bezier(.2,.8,.2,1) both}
+    .hero h1{animation-delay:.08s}.hero-position{animation-delay:.18s}.hero-description{animation-delay:.24s}.scroll-link{animation-delay:.3s}.portrait{animation:photo-in 1s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}@keyframes photo-in{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0)}}
+
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .metric{padding:29px 22px;border-right:1px solid var(--line)}.metric:first-child{padding-left:0}.metric:last-child{border-right:0}
+    .metric strong{display:block;font-size:44px;line-height:1;letter-spacing:-.06em}.metric span{display:block;margin-top:9px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+    .section{padding-top:115px;padding-bottom:120px}
+    .section-heading{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:65px}
+    .section-heading h2,.about h2{margin:20px 0 0;font-size:clamp(44px,6.5vw,94px);font-weight:800;line-height:.92;letter-spacing:-.075em}
+    .section-heading>p{max-width:390px;margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+    .js .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}.js .reveal.is-visible{opacity:1;transform:none}
+
+    .folders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:58px 19px;align-items:start}
+    .folder-unit{min-width:0}.folder-unit:nth-child(3n+2){margin-top:45px}.folder-unit:nth-child(3n){margin-top:12px}
+    .folder-trigger{display:block;text-align:left;width:100%;border:0;background:transparent;padding:0;color:var(--ink)}
+    .folder-index{display:block;font-size:10px;letter-spacing:.16em;font-weight:800;margin-bottom:13px}
+    .folder-object{height:clamp(270px,28vw,370px);position:relative;perspective:850px;isolation:isolate;transition:transform .35s}
+    .folder-trigger:hover .folder-object{transform:translateY(-6px)}
+    .folder-back{position:absolute;inset:15% 2% 8%;background:linear-gradient(145deg,color-mix(in srgb,var(--tone) 65%,#fff),color-mix(in srgb,var(--tone) 60%,#171d2b));border-radius:10px 10px 16px 16px;box-shadow:0 20px 33px #0002}
+    .folder-sheet{position:absolute;height:79%;top:3%;background:#faf8f5;color:#26302d;border:1px solid #d9ddd9;box-shadow:0 4px 15px #1519212b;border-radius:5px;padding:11px;overflow:hidden;transform-origin:50% 95%;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+    .sheet-one{left:8%;right:22%;transform:rotate(-8deg)}.sheet-two{top:0;left:19%;right:8%;transform:rotate(5deg)}
+    .is-open .sheet-one{transform:rotate(-17deg) translate(-9px,-34px)}.is-open .sheet-two{transform:rotate(15deg) translate(8px,-48px)}
+    .document{width:100%;height:100%;display:flex;flex-direction:column;gap:8px;letter-spacing:normal}
+    .document-platform{display:flex;align-items:center;gap:6px;font-size:8px;font-weight:800;letter-spacing:.07em;color:#58676d}.document-platform>b{display:grid;place-items:center;width:23px;height:23px;flex-shrink:0;border-radius:50%;background:var(--tone);color:#101720;font-size:9px}.document-platform>span:last-child{margin-left:auto}
+    .document-header{display:flex;flex-direction:column;gap:2px;padding-bottom:6px;border-bottom:1px solid #dce1de}.document-header>b{font-size:14px;letter-spacing:-.04em;line-height:1.1}.document-header>small{font-size:8px;color:#64716e}
+    .document-art{position:relative;isolation:isolate;overflow:hidden;flex:1;min-height:85px;padding:12px;display:flex;flex-direction:column;justify-content:end;gap:5px;background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 55%,#fff),var(--tone));color:#18221e}
+    .document-art:before{position:absolute;inset:0;z-index:-1;content:'';background:repeating-linear-gradient(135deg,transparent 0 24px,#ffffff28 25px 26px)}
+    .document-art>strong{font-size:clamp(23px,2.7vw,38px);font-weight:800;line-height:.95;letter-spacing:-.065em}.document-art>small{font-size:8px;font-weight:700;line-height:1.4}
+    .document-footer{display:flex;justify-content:space-between;gap:4px;font-size:6px;letter-spacing:.06em;font-weight:700;color:#64716e}
+    .folder-front{position:absolute;inset:36% 0 0;border-radius:12px 12px 17px 17px;transform-origin:bottom center;background:linear-gradient(125deg,color-mix(in srgb,var(--tone) 25%,#ffffffdc),color-mix(in srgb,var(--tone) 45%,#9aa7b877));backdrop-filter:blur(13px);border:1px solid #ffffffc9;box-shadow:0 15px 30px #1c23302c;display:flex;flex-direction:column;justify-content:end;padding:24px;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+    .is-open .folder-front{transform:rotateX(-20deg) translateY(12px)}
+    .folder-front>span{font-size:clamp(22px,2.55vw,39px);font-weight:800;letter-spacing:-.055em;line-height:1}.folder-front>small{margin-top:8px;font-size:9px;letter-spacing:.09em;font-weight:700}
+    .folder-label{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:18px;font-size:13px;font-weight:800}.folder-label>span{font-size:9px;letter-spacing:.1em;color:var(--muted)}
+    .folder-reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1),opacity .3s}.is-open .folder-reveal{grid-template-rows:1fr;opacity:1}.folder-reveal-inner{overflow:hidden}
+    .folder-reveal p{margin:22px 0 12px;color:var(--muted);font-size:13px;line-height:1.6}.folder-reveal ul{margin:0;padding:0;list-style:none}.folder-reveal li{position:relative;padding:10px 0 10px 17px;border-top:1px solid var(--line);font-size:11px;line-height:1.45}.folder-reveal li:before{position:absolute;left:0;top:16px;width:6px;height:6px;content:'';border-radius:50%;background:var(--tone)}
+    .folder-more{margin-top:15px;padding:11px 15px;border:0;background:var(--ink);color:var(--paper);font-size:10px;font-weight:800;letter-spacing:.06em}.folder-more:hover{background:var(--blue);color:#fff}
+
+    .immersive-tunnel{height:500vh;position:relative;background:var(--night);color:#f5f6fc;isolation:isolate}
+    .tunnel-sticky{position:sticky;top:0;width:100%;height:100svh;min-height:550px;overflow:hidden;display:grid;place-items:center;perspective:1050px;background:radial-gradient(ellipse at center,#242d4b 0%,#111522 60%,#0c0f19 100%)}
+    .tunnel-grid{position:absolute;inset:-20%;pointer-events:none;opacity:.2;background-image:linear-gradient(90deg,transparent 49.94%,#8493d350 50%,transparent 50.06%),linear-gradient(0deg,transparent 49.94%,#8493d350 50%,transparent 50.06%),radial-gradient(#8391bb 1px,transparent 1.6px);background-size:100% 100%,100% 100%,32px 32px;mask-image:radial-gradient(ellipse at center,#000 0%,transparent 68%)}
+    .tunnel-sticky:before,.tunnel-sticky:after{content:'';position:absolute;left:50%;top:50%;width:38vmin;height:38vmin;border:1px solid #8ea3d62e;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.tunnel-sticky:after{width:72vmin;height:72vmin;border-style:dashed;border-color:#8ea3d620}
+    .tunnel-entry,.tunnel-finish{text-align:center;position:absolute;z-index:2;pointer-events:none;width:min(720px,90vw)}
+    .tunnel-entry .overline{color:#c0c7ff}.tunnel-entry h2,.tunnel-finish h2{font-size:clamp(42px,6vw,88px);line-height:.94;letter-spacing:-.075em;margin:20px 0 16px;font-weight:800}.tunnel-entry p,.tunnel-finish p{color:#b2bddb;font-size:12px}.tunnel-entry h2 span{color:#aab4fc}
+    .tunnel-3d{position:absolute;inset:0;transform-style:preserve-3d;perspective:1050px;pointer-events:none}
+    .tunnel-plane{position:absolute;top:50%;left:50%;width:420px;min-height:270px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;background:#171d31;border:1px solid #9caaf973;box-shadow:0 28px 55px #0009;text-align:left;transform-style:preserve-3d;opacity:0;will-change:transform,opacity}
+    .tunnel-plane-top{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.17em;color:#c0c9ea}.tunnel-plane strong{display:block;margin:45px 0 12px;font-size:37px;line-height:1;letter-spacing:-.055em}.tunnel-plane p{margin:0;color:#b8c4e2;font-size:12px}.tunnel-plane-line{height:4px;margin-top:26px;background:var(--plane)}
+    .tunnel-progress{position:absolute;left:4vw;bottom:27px;color:#d0d7ef;font-size:10px;letter-spacing:.18em}.tunnel-scroll{position:absolute;right:4vw;bottom:27px;color:#d0d7ef;font-size:10px;letter-spacing:.14em}
+    .tunnel-finish{z-index:3;opacity:0;padding:28px;background:#111626e8;border:1px solid #7383bb73}.tunnel-finish>span{letter-spacing:.15em;color:#c6d0f4;font-size:11px}
+    .tunnel-static{display:none}
+
+    .about{display:grid;grid-template-columns:1.15fr .85fr;gap:8%;align-items:start}.about-right{padding-top:36px}.about-right>p{margin:0;color:var(--muted);font-size:17px;line-height:1.7;letter-spacing:-.02em}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}.chips span{padding:8px 12px;border:1px solid var(--line);border-radius:99px;font-size:10px;font-weight:700}
+
+    .finale{position:relative;min-height:100svh;padding:45px 0 40px;overflow:hidden;background:var(--acid);color:#101612;isolation:isolate}
+    .finale:before{position:absolute;inset:0;z-index:-1;content:'';background:radial-gradient(circle at 80% 20%,#fff6,transparent 35%),repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),#17201718 calc(25% - 1px) 25%)}
+    .final-top{display:flex;justify-content:space-between;border-top:1px solid #18201855;padding-top:15px;font-size:10px;font-weight:800;letter-spacing:.15em}
+    .finale h2{margin:10vh 0 0;font-size:clamp(82px,15.3vw,250px);font-weight:800;line-height:.77;letter-spacing:-.095em}.finale h2 span{display:block}.finale h2 span:last-child{color:transparent;-webkit-text-stroke:2px #101612}
+    .final-bottom{display:flex;margin-top:9vh;align-items:end;justify-content:space-between;gap:30px}.final-bottom p{max-width:310px;margin:0;font-size:14px;line-height:1.55}
+    .final-actions{display:flex;gap:12px;align-items:center}.final-actions button{min-width:150px;height:66px;padding:0 28px;border:2px solid #101612;background:#101612;color:var(--acid);font-size:16px;font-weight:800;letter-spacing:.08em;transition:transform .15s,background .2s}.final-actions button:hover{transform:translateY(-4px)}.final-actions #noBtn{background:transparent;color:#101612;transition:left .16s,top .16s,transform .16s;z-index:10}.final-note{position:absolute;right:4.5vw;bottom:18px;margin:0;font-size:9px;font-weight:700;letter-spacing:.1em}
+
+    .case-dialog{width:min(1120px,calc(100% - 40px));max-height:calc(100dvh - 40px);padding:0;border:0;background:var(--paper);color:var(--ink);box-shadow:0 30px 120px #0007;overflow:auto}.case-dialog::backdrop{background:#070a10e8;backdrop-filter:blur(5px)}
+    .dialog-close{position:sticky;float:right;top:18px;right:18px;z-index:4;display:grid;width:44px;height:44px;margin:18px 18px -62px 0;place-items:center;border:0;border-radius:50%;background:var(--ink);color:var(--paper);font-size:25px}
+    .case-head{padding:65px 60px 40px;border-bottom:1px solid var(--line)}.case-head h2{margin:20px 0;font-size:clamp(54px,9vw,125px);font-weight:800;line-height:.86;letter-spacing:-.085em}.case-head>p:last-child{max-width:650px;margin:0;color:var(--muted);font-size:18px;line-height:1.55}
+    .case-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;padding:35px 60px 60px}.case-facts>div{padding-top:14px;border-top:1px solid var(--line)}.case-facts span{display:block;margin-bottom:15px;color:var(--muted);font-size:10px;letter-spacing:.13em}.case-facts strong{font-size:17px;line-height:1.45}
+    .case-section-title{margin:0 60px;padding:14px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:.14em}.case-section-title span:last-child{color:var(--muted)}
+    .case-showcase{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:repeat(2,210px);gap:12px;padding:28px 60px 65px}.case-art{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;background:linear-gradient(145deg,color-mix(in srgb,var(--tone) 60%,#263047),#1c2230);color:#fff}.case-art:first-child{grid-row:span 2}.case-art:before{position:absolute;inset:0;content:'';background:repeating-linear-gradient(135deg,transparent 0 35px,#ffffff10 36px 37px)}.case-art>*{position:relative}.case-art-top,.case-art-foot{display:flex;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.13em;color:#ffffffc4}.case-art strong{font-size:clamp(30px,4.5vw,66px);line-height:.95;letter-spacing:-.07em}.case-art-foot{padding-top:12px;border-top:1px solid #ffffff55}
+    .case-bottom{display:flex;padding:25px 60px;align-items:center;justify-content:space-between;gap:20px;background:var(--ink);color:var(--paper);font-size:10px;letter-spacing:.1em}.case-bottom button{padding:12px 16px;border:1px solid currentColor;background:transparent;color:inherit;font-size:10px;font-weight:800}
+
+    html[data-theme="dark"] .folder-front{background:linear-gradient(125deg,#58616bd9,#2d353cdd);border-color:#9da7ac66;color:#f3f4f4}html[data-theme="dark"] .folder-sheet{background:#e2e5e0;color:#26302d}html[data-theme="dark"] .folder-back{background:linear-gradient(135deg,#505961,#222b32)}
+
+    @media(max-width:950px){.nav-tag{display:none}.site-nav nav{gap:20px}.hero{min-height:600px}.hero h1{font-size:clamp(64px,9vw,105px)}.portrait{min-height:580px}.folders{grid-template-columns:repeat(2,minmax(0,1fr))}.folder-unit:nth-child(n){margin-top:0}.folder-unit:nth-child(even){margin-top:35px}.section-heading h2{font-size:55px}.about{gap:5%}.finale h2{font-size:15vw}}
+    @media(max-width:650px){.container{width:calc(100% - 36px)}.site-nav{height:69px;gap:8px}.wordmark{font-size:11px;letter-spacing:.1em}.site-nav nav{gap:12px}.site-nav nav a{font-size:9px}.site-nav nav a:nth-child(2){display:none}.nav-actions{gap:0}.theme-toggle{width:39px;height:39px}.hero{display:flex;flex-direction:column-reverse;min-height:auto}.portrait{margin:0 -18px;min-height:360px;height:48svh;background-position:center 25%}.portrait:before{background:linear-gradient(0deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 97%,transparent) 5%,color-mix(in srgb,var(--paper) 90%,transparent) 10%,color-mix(in srgb,var(--paper) 79%,transparent) 15%,color-mix(in srgb,var(--paper) 65%,transparent) 20%,color-mix(in srgb,var(--paper) 49%,transparent) 25%,color-mix(in srgb,var(--paper) 33%,transparent) 30%,color-mix(in srgb,var(--paper) 19%,transparent) 35%,color-mix(in srgb,var(--paper) 8%,transparent) 40%,transparent 45%),linear-gradient(180deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 88%,transparent) 4%,color-mix(in srgb,var(--paper) 65%,transparent) 8%,color-mix(in srgb,var(--paper) 35%,transparent) 12%,color-mix(in srgb,var(--paper) 12%,transparent) 16%,transparent 20%)}.portrait:after{right:18px;bottom:18px;font-size:7px}.hero-text{padding:35px 0 55px}.hero h1{font-size:clamp(58px,15.5vw,88px);margin:24px 0}.hero-position{font-size:17px}.metrics{grid-template-columns:repeat(2,1fr)}.metric{padding:24px 8px}.metric:first-child{padding-left:8px}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--line)}.metric strong{font-size:36px}.metric span{font-size:9px}.section{padding-top:70px;padding-bottom:75px}.section-heading{display:block;margin-bottom:45px}.section-heading h2{font-size:36px}.section-heading>p{margin-top:18px}.folders{grid-template-columns:1fr;gap:42px}.folder-unit:nth-child(n){margin-top:0}.folder-object{height:330px}.folder-front{padding:25px}.folder-front>span{font-size:34px}.immersive-tunnel{height:440vh}.tunnel-sticky{min-height:500px}.tunnel-entry h2{font-size:42px}.tunnel-entry .overline{font-size:8px}.tunnel-plane{width:280px;min-height:225px;left:50%;padding:17px}.tunnel-plane strong{margin-top:32px;font-size:29px}.tunnel-progress{bottom:15px}.tunnel-scroll{bottom:15px;font-size:8px}.about{display:block}.about-right{padding-top:25px}.about-right>p{font-size:15px}.finale{min-height:100svh;padding-top:28px}.final-top{font-size:8px}.finale h2{margin-top:14vh;font-size:20vw;line-height:.82}.finale h2 span:last-child{-webkit-text-stroke-width:1.3px}.final-bottom{display:block;margin-top:12vh}.final-actions{margin-top:30px}.final-actions button{min-width:130px;height:58px}.final-note{right:18px;bottom:14px;font-size:7px}.case-dialog{width:100%;max-height:100dvh;height:100dvh;margin:0;max-width:none}.case-head{padding:75px 22px 30px}.case-head h2{font-size:52px}.case-head>p:last-child{font-size:15px}.case-facts{grid-template-columns:1fr;gap:8px;padding:25px 22px 40px}.case-facts>div{display:grid;grid-template-columns:30px 1fr;gap:8px}.case-facts span{margin:0}.case-facts strong{font-size:14px}.case-section-title{margin:0 22px}.case-showcase{display:flex;flex-direction:column;padding:22px}.case-art,.case-art:first-child{min-height:220px}.case-bottom{padding:22px;align-items:start;flex-direction:column}.dialog-close{right:8px;top:8px;margin:9px 9px -53px 0}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.js .reveal{opacity:1;transform:none}.immersive-tunnel{height:auto;min-height:100svh}.tunnel-sticky{position:relative;height:auto;min-height:100svh;padding:70px 0}.tunnel-entry,.tunnel-3d,.tunnel-finish,.tunnel-progress,.tunnel-scroll{display:none}.tunnel-static{display:block;position:relative;z-index:3;width:min(1000px,90vw);text-align:center}.tunnel-static h2{font-size:clamp(38px,7vw,80px);line-height:.95;letter-spacing:-.06em}.tunnel-static-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:30px}.tunnel-static-grid>div{padding:18px 10px;background:#202944;border:1px solid #7181ad}.tunnel-static-grid b{font-size:12px}.tunnel-static-grid span{display:block;margin-top:8px;color:#b9c4e2;font-size:9px}}
+  </style>
+</head>
+<body>
+  <header class="site-nav container">
+    <a class="wordmark" href="#top">ЮРА / BUILD LOG<span>·</span></a>
+    <nav aria-label="Основная навигация"><a href="#projects">Задачи</a><a href="#process">Процесс</a><a href="#about">Подход</a><a href="#final">Финал</a></nav>
+    <div class="nav-actions"><span class="nav-tag">30 ДНЕЙ / 2026</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тёмную тему" title="Сменить тему"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 1 0 9 9 7 7 0 0 1-9-9Z"/><path class="rays" d="M12 1v2m0 18v2M1 12h2m18 0h2M3.5 3.5 5 5m14 14 1.5 1.5m0-17L19 5M5 19l-1.5 1.5"/></svg></button></div>
+  </header>
+
+  <main id="top">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <p class="overline">AI × КОД × РЕАЛЬНЫЕ РЕЗУЛЬТАТЫ</p>
+        <h1 id="hero-title">Я УЖЕ<br><span>МЕСЯЦ</span><br>ВАЙБУЮ<b>.</b></h1>
+        <p class="hero-position">Не портфолио. Журнал задач,<br>которые реально дошли до результата.</p>
+        <p class="hero-description">Разобрать, собрать, проверить, запустить. Без видео, без концептов ради концептов и без одинаковых карточек с красивыми словами.</p>
+        <a class="scroll-link" href="#projects"><span>↓</span> СМОТРЕТЬ, ЧТО СДЕЛАНО</a>
+      </div>
+      <div class="portrait" role="img" aria-label="Юра на красном фоне"></div>
+    </section>
+
+    <div class="metrics container" aria-label="Короткая сводка"><div class="metric"><strong>30</strong><span>дней в работе</span></div><div class="metric"><strong>10</strong><span>направлений</span></div><div class="metric"><strong>30</strong><span>конкретных действий</span></div><div class="metric"><strong>0</strong><span>шаблонных обещаний</span></div></div>
+
+    <section id="projects" class="projects section container" aria-labelledby="projects-title">
+      <div class="section-heading reveal"><div><p class="overline">01 / СДЕЛАНО</p><h2 id="projects-title">ПАПКИ. НЕ КЕЙСЫ<br>РАДИ КЕЙСОВ.</h2></div><p>Внутри каждой — конкретные задачи из Git: что подключил, что починил и что наконец заработало как единая система.</p></div>
+      <div class="folders" id="folders"></div>
+    </section>
+
+    <section id="process" class="immersive-tunnel" aria-label="Процесс работы">
+      <div class="tunnel-sticky">
+        <div class="tunnel-grid" aria-hidden="true"></div>
+        <div class="tunnel-entry" id="tunnelEntry"><p class="overline">02 / ПРОКРУТИ ВНУТРЬ ПРОЦЕССА</p><h2>КАК ВАЙБ<br>СТАНОВИТСЯ<br><span>РЕЗУЛЬТАТОМ.</span></h2><p>Не магия. Пять повторяемых шагов.</p></div>
+        <div class="tunnel-3d" id="tunnelPlanes" aria-hidden="true"></div>
+        <div class="tunnel-finish" id="tunnelFinish"><span>05 / 05 — ЦИКЛ ЗАМКНУЛСЯ</span><h2>ПРОВЕРИЛ.<br>ЗАПУСТИЛ.</h2><p>И пошёл разбирать следующую задачу.</p></div>
+        <span class="tunnel-progress" id="tunnelProgress">01 — 05 / ПРОЦЕСС</span><span class="tunnel-scroll">СКРОЛЛ ↓</span>
+        <div class="tunnel-static"><h2>ОТ ЗАДАЧИ<br>ДО ЗАПУСКА.</h2><div class="tunnel-static-grid"><div><b>ЗАДАЧА</b><span>что должно измениться</span></div><div><b>КОНТЕКСТ</b><span>данные и ограничения</span></div><div><b>СБОРКА</b><span>рабочая версия</span></div><div><b>ПРОВЕРКА</b><span>реальные сценарии</span></div><div><b>ЗАПУСК</b><span>результат и итерации</span></div></div></div>
+      </div>
+    </section>
+
+    <section id="about" class="about section container">
+      <div class="reveal"><p class="overline">03 / ПОДХОД</p><h2>НЕ ПРОСТО<br>«СГЕНЕРИРОВАЛ<br>И ГОТОВО».</h2></div>
+      <div class="about-right reveal"><p>Вайб — это скорость входа в задачу, а не повод пропустить проверку. Сначала разбираю процесс и данные, потом собираю рабочий контур, гоняю реальные сценарии и только после этого считаю задачу сделанной.</p><div class="chips"><span>Kimi Code</span><span>Codex</span><span>Ollama</span><span>SpeechKit</span><span>amoCRM</span><span>HH.ru</span><span>Python</span><span>JavaScript</span><span>GitHub</span></div></div>
+    </section>
+  </main>
+
+  <footer class="finale" id="final">
+    <div class="container final-top"><span>04 / ЭТО БЫЛ ПЕРВЫЙ МЕСЯЦ</span><span>ДАЛЬШЕ — БОЛЬШЕ</span></div>
+    <div class="container reveal"><h2><span>ВАЙБИМ</span><span>ДАЛЬШЕ?</span></h2><div class="final-bottom"><p>Можно закрыть страницу. Или признать очевидное: останавливаться сейчас было бы странно.</p><div class="final-actions"><button id="yesBtn" type="button">ДА ↗</button><button id="noBtn" type="button" tabindex="-1" aria-disabled="true">НЕТ</button></div></div></div>
+    <p class="final-note">КНОПКА «НЕТ» НЕМНОГО СТЕСНЯЕТСЯ</p>
+  </footer>
+
+  <dialog class="case-dialog" id="caseDialog" aria-labelledby="dialogTitle">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Закрыть">×</button>
+    <div class="case-head"><p class="overline" id="dialogTag"></p><h2 id="dialogTitle"></h2><p id="dialogDescription"></p></div>
+    <div class="case-facts" id="dialogFacts"></div>
+    <div class="case-section-title"><span>02 / МАТЕРИАЛЫ</span><span>СХЕМА РЕЗУЛЬТАТА</span></div>
+    <div class="case-showcase" id="dialogGallery"></div>
+    <div class="case-bottom"><span>30 ДНЕЙ / BUILD LOG / 2026</span><button id="dialogBack" type="button">ВЕРНУТЬСЯ К ПАПКАМ ↑</button></div>
+  </dialog>
+
+  <script>
+    const cases = [
+      {id:'work',name:'PLEADA WORK',tag:'КАБИНЕТ / CRM / AI',tone:'#b8c7ff',description:'Рабочий кабинет, в котором задачи, встречи, CRM и управленческие витрины наконец живут в одной системе.',facts:['Вынес кабинет в отдельный репозиторий и настроил выкладку','Добавил ролевые доступы и живые разделы','Подключил встречи, потенциал и закупки'],docs:['КАБИНЕТ / МОЙ ДЕНЬ','CRM / LIVE DATA','AI / ПАША']},
+      {id:'money',name:'ДЕНЬГИ КЛИЕНТА',tag:'AI / AMOCRM / АНАЛИТИКА',tone:'#d7ff5f',description:'Из расшифровок звонков — в проверяемые деньги и планируемый ПВ, с дословными цитатами и ручной сверкой.',facts:['Собрал dry-run сначала без записи в CRM','Добавил дашборд руководителя и ссылки на сделки','Запустил backfill с очередью и защитой от дублей'],docs:['AI / ДЕНЬГИ','CRM / ПВ','ЦИТАТЫ / ПРОВЕРКА']},
+      {id:'pasha',name:'ПАША + CRM',tag:'SPEECHKIT / ДОСТАВКА',tone:'#d0c4ff',description:'Восстановил путь от аудио до полноценной карточки в CRM и убрал тихие потери данных по дороге.',facts:['Вернул доставку старых расшифровок пакетами','Сохранил все реплики и кликабельные вложения','Закрыл повторный POST и объединил звонок со встречей'],docs:['ASR / ТЕКСТ','CRM / ВЛОЖЕНИЕ','QUEUE / RECEIPT']},
+      {id:'potential',name:'ПОТЕНЦИАЛ',tag:'ЭКСПЕРТЫ / ВСТРЕЧИ',tone:'#ffcf70',description:'Потенциал экспертов за календарный год и воронка, доведённая до первой и второй встречи.',facts:['Уточнил источники конверсий и подписаний','Разделил первые и вторые встречи по экспертам','Вынес раздел в верхнее меню кабинета'],docs:['ГОД / 2026','ЭКСПЕРТЫ / КОНВЕРСИИ','ВСТРЕЧИ / 01→02']},
+      {id:'procurement',name:'ЗАКУПКИ',tag:'A/B/C / TELEGRAM / MAX',tone:'#8fe5ff',description:'Посевы, каналы и оплаченные сделки связаны в дашборде, которому можно доверять без ручной сборки.',facts:['Собрал контуры A/B/C и экран сделок с фильтрами','Добавил уникальные сделки Telegram и Max','Убрал двойной учёт трат и поправил даты посевов'],docs:['A/B/C / КОНТУРЫ','TELEGRAM / MAX','ПОСЕВЫ / СДЕЛКИ']},
+      {id:'hiring',name:'НАЙМ',tag:'HH.RU / HR / ИСТОРИЯ',tone:'#ff9fba',description:'HH превратился в живой кабинет найма: свежие карточки, полные резюме и понятная история этапов.',facts:['Подтянул полные резюме и локальные снимки','Синхронизировал этапы и исторические события','Добавил архив, возврат и права редакторов HR'],docs:['HH / РЕЗЮМЕ','HR / ЭТАПЫ','АРХИВ / ИСТОРИЯ']},
+      {id:'reviews',name:'ОТЗЫВЫ',tag:'PLITONIT / AI-СЕРВИС',tone:'#ff9b61',description:'Кабинет ответов от бренда: официальные источники, живой тон и нормальный редакторский процесс.',facts:['Подключил источники и актуальные API площадок','Убрал нейросетевые клише, добавил голос бренда','Сделал ИИ-правку и массовую генерацию черновиков'],docs:['WB / ОТЗЫВ','BRAND / TONE','AI / ЧЕРНОВИК']},
+      {id:'resize',name:'РЕСАЙЗЫ',tag:'PLITONIT / CREATIVE TOOL',tone:'#f5b3ff',description:'Инструмент для площадок: размеры меняются, а содержимое исходного макета не приносится в жертву.',facts:['Сделал пакетную загрузку и экспорт PNG/JPEG','Добавил умное кадрирование без фона и рамок','Собрал серверную библиотеку исходников и результатов'],docs:['SOURCE / МАКЕТ','SMART / CROP','EXPORT / PNG']},
+      {id:'news',name:'НОВОСТИ АРТУРА',tag:'PERSONAL DIGEST / OLLAMA',tone:'#9ed8ff',description:'Персональная новостная лента без мероприятий и шума, с полным текстом и коротким саммари.',facts:['Добавил категории и фильтр целевых акций и ЖК','Подключил полный текст и саммари через Ollama','Ввёл личные курсоры, Rich-карточки и защиту от повторов'],docs:['NEWS / ЛЕНТА','OLLAMA / SUMMARY','CURSOR / PERSONAL']},
+      {id:'seo',name:'PLEADA SEO',tag:'КОНТЕНТ / ФАКТЫ / ТЕХНИКА',tone:'#c9ef9f',description:'',facts:['Добавил проверку источников, включая PDF и DOCX','Обновил метаданные, sitemap, ссылки и верификации'],docs:['ARTICLE / LIVE','FACTS / CHECK','SEO / SITEMAP']}
+    ];
+
+    const folders = document.getElementById('folders');
+    const dialog = document.getElementById('caseDialog');
+    const escapeHTML = (value) => value.replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+
+    function documentPreview(c, label, index) {
+      return `<span class="document"><span class="document-platform"><b>${String(index + 1).padStart(2,'0')}</b><span>${escapeHTML(label.split(' / ')[0])}</span><span>↗</span></span><span class="document-header"><b>${escapeHTML(c.name)}</b><small>${escapeHTML(label)}</small></span><span class="document-art"><strong>${escapeHTML(label.split(' / ')[1] || c.name)}</strong><small>${escapeHTML(c.tag)}</small></span><span class="document-footer">СДЕЛАНО / ПРОВЕРЕНО<span>2026</span></span></span>`;
+    }
+
+    cases.forEach((c, index) => {
+      const unit = document.createElement('article');
+      unit.className = 'folder-unit reveal';
+      unit.style.setProperty('--tone', c.tone);
+      unit.innerHTML = `<button class="folder-trigger" type="button" aria-expanded="false" aria-controls="folder-${c.id}"><span class="folder-index">${String(index + 1).padStart(2,'0')} / НАПРАВЛЕНИЕ</span><div class="folder-object" aria-hidden="true"><span class="folder-back"></span><span class="folder-sheet sheet-one">${documentPreview(c,c.docs[0],0)}</span><span class="folder-sheet sheet-two">${documentPreview(c,c.docs[1],1)}</span><span class="folder-front"><span>${escapeHTML(c.name)}</span><small>${escapeHTML(c.tag)}</small></span></div><span class="folder-label">${escapeHTML(c.name)}<span>ОТКРЫТЬ +</span></span></button><div class="folder-reveal" id="folder-${c.id}"><div class="folder-reveal-inner">${c.description ? `<p>${escapeHTML(c.description)}</p>` : ''}<ul>${c.facts.map((fact) => `<li>${escapeHTML(fact)}</li>`).join('')}</ul><button class="folder-more" type="button">ОТКРЫТЬ ВЕСЬ ЛОГ ↗</button></div></div>`;
+      const trigger = unit.querySelector('.folder-trigger');
+      trigger.addEventListener('click', () => {
+        const willOpen = !unit.classList.contains('is-open');
+        document.querySelectorAll('.folder-unit.is-open').forEach((other) => {
+          other.classList.remove('is-open');
+          other.querySelector('.folder-trigger').setAttribute('aria-expanded','false');
+          other.querySelector('.folder-label>span').textContent = 'ОТКРЫТЬ +';
+        });
+        unit.classList.toggle('is-open', willOpen);
+        trigger.setAttribute('aria-expanded', String(willOpen));
+        unit.querySelector('.folder-label>span').textContent = willOpen ? 'ЗАКРЫТЬ −' : 'ОТКРЫТЬ +';
+      });
+      unit.querySelector('.folder-more').addEventListener('click', () => openCase(c));
+      folders.appendChild(unit);
+    });
+
+    function openCase(c) {
+      dialog.style.setProperty('--tone', c.tone);
+      document.getElementById('dialogTag').textContent = `ЗАДАЧА / ${c.tag}`;
+      document.getElementById('dialogTitle').textContent = c.name;
+      const dialogDescription = document.getElementById('dialogDescription');
+      dialogDescription.textContent = c.description;
+      dialogDescription.hidden = !c.description;
+      document.getElementById('dialogFacts').innerHTML = c.facts.map((fact,i) => `<div><span>0${i + 1}</span><strong>${escapeHTML(fact)}</strong></div>`).join('');
+      document.getElementById('dialogGallery').innerHTML = c.docs.map((doc,i) => `<div class="case-art"><div class="case-art-top"><span>0${i + 1} / ${escapeHTML(c.name)}</span><span>↗</span></div><strong>${escapeHTML(doc.split(' / ')[1] || doc)}</strong><div class="case-art-foot"><span>${escapeHTML(doc)}</span><span>2026</span></div></div>`).join('');
+      dialog.showModal();
+      document.body.classList.add('modal-open');
+    }
+    function closeCase() { dialog.close(); document.body.classList.remove('modal-open'); }
+    document.getElementById('dialogClose').addEventListener('click', closeCase);
+    document.getElementById('dialogBack').addEventListener('click', closeCase);
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) closeCase(); });
+    dialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); } });
+    }, {threshold:.08, rootMargin:'0px 0px -5% 0px'});
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const processSteps = [
+      {title:'ЗАДАЧА',text:'Что должно измениться и какой результат считаем хорошим.',color:'#b8c7ff'},
+      {title:'КОНТЕКСТ',text:'Читаю данные, процесс и ограничения. Не выдумываю недостающее.',color:'#d7ff5f'},
+      {title:'СБОРКА',text:'Собираю рабочую версию, а не картинку для презентации.',color:'#ff9fba'},
+      {title:'ПРОВЕРКА',text:'Гоняю реальные сценарии, сверяю цифры, чиню краевые случаи.',color:'#8fe5ff'},
+      {title:'ЗАПУСК',text:'Выкладываю, проверяю ещё раз и возвращаюсь к следующей задаче.',color:'#ffcf70'}
+    ];
+    const tunnel = document.getElementById('process');
+    const planesRoot = document.getElementById('tunnelPlanes');
+    const entry = document.getElementById('tunnelEntry'), finish = document.getElementById('tunnelFinish');
+    const planes = processSteps.map((step,i) => {
+      const plane = document.createElement('div');
+      plane.className = 'tunnel-plane';
+      plane.style.setProperty('--plane', step.color);
+      plane.innerHTML = `<div class="tunnel-plane-top"><span>0${i + 1} / 05</span><span>BUILD LOG</span></div><div><strong>${step.title}</strong><p>${step.text}</p></div><div class="tunnel-plane-line"></div>`;
+      planesRoot.appendChild(plane);
+      return plane;
+    });
+    const clamp = (value,min=0,max=1) => Math.min(max,Math.max(min,value));
+    let ticking = false;
+    function updateTunnel() {
+      ticking = false;
+      if (reduced) return;
+      const rect = tunnel.getBoundingClientRect();
+      const distance = Math.max(1,tunnel.offsetHeight - innerHeight);
+      const p = clamp(-rect.top / distance);
+      entry.style.opacity = String(1 - clamp(p / .075));
+      entry.style.transform = `scale(${1 + p * .6})`;
+      entry.style.visibility = p > .085 ? 'hidden' : 'visible';
+      planes.forEach((plane,i) => {
+        const start = .075 + i * .16;
+        const local = (p - start) / .18;
+        const visible = clamp(local / .25) * (1 - clamp((local - .72) / .28));
+        const scale = .48 + clamp(local) * 1.25;
+        const x = (i % 2 ? 1 : -1) * (1 - clamp(local)) * 230;
+        const y = ((i % 3) - 1) * (1 - clamp(local)) * 90;
+        const rotate = (i % 2 ? 1 : -1) * (1 - clamp(local)) * 9;
+        plane.style.opacity = String(visible);
+        plane.style.transform = `translate(-50%,-50%) translate(${x}px,${y}px) scale(${scale}) rotate(${rotate}deg)`;
+      });
+      finish.style.opacity = String(clamp((p - .88) / .08));
+      document.getElementById('tunnelProgress').textContent = `${String(Math.min(5,Math.floor(p * 6) + 1)).padStart(2,'0')} — 05 / ПРОЦЕСС`;
+    }
+    function requestTunnel() { if (!ticking) { ticking = true; requestAnimationFrame(updateTunnel); } }
+    addEventListener('scroll', requestTunnel, {passive:true});
+    addEventListener('resize', requestTunnel);
+    updateTunnel();
+
+    const themeToggle = document.getElementById('themeToggle');
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('denis-work-theme'); } catch {}
+    if (savedTheme === 'dark') document.documentElement.dataset.theme = 'dark';
+    function syncThemeLabel() { themeToggle.setAttribute('aria-label', document.documentElement.dataset.theme === 'dark' ? 'Переключить светлую тему' : 'Переключить тёмную тему'); }
+    syncThemeLabel();
+    themeToggle.addEventListener('click', () => {
+      const dark = document.documentElement.dataset.theme !== 'dark';
+      if (dark) document.documentElement.dataset.theme = 'dark'; else delete document.documentElement.dataset.theme;
+      try { localStorage.setItem('denis-work-theme', dark ? 'dark' : 'light'); } catch {}
+      syncThemeLabel();
+    });
+
+    const noBtn = document.getElementById('noBtn');
+    function moveNo(event) {
+      if (event) event.preventDefault();
+      const rect = noBtn.getBoundingClientRect();
+      const maxX = Math.max(12,innerWidth - rect.width - 12), maxY = Math.max(12,innerHeight - rect.height - 12);
+      let x = rect.left, y = rect.top;
+      for (let tries = 0; tries < 8; tries++) {
+        x = 12 + Math.random() * (maxX - 12); y = 12 + Math.random() * (maxY - 12);
+        if (Math.hypot(x - rect.left,y - rect.top) > 140) break;
+      }
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.margin = '0';
+      if (document.activeElement === noBtn) noBtn.blur();
+    }
+    ['pointerenter','pointerdown','touchstart','focus'].forEach((type) => noBtn.addEventListener(type, moveNo, {passive:false}));
+    noBtn.addEventListener('click', moveNo);
+    noBtn.addEventListener('keydown', (event) => { if (['Enter',' '].includes(event.key)) moveNo(event); });
+    document.getElementById('yesBtn').addEventListener('click', () => {
+      window.open('https://t.me/saintuda?text=' + encodeURIComponent('ВАЙБУЕМ!!!'), '_blank', 'noopener');
+    });
+  </script>
+</body>
+</html>
